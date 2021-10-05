@@ -1,0 +1,83 @@
+<%- include('partials/header.ejs') %>
+<body>
+<div class="container py-5 px-4">
+  <!-- For demo purpose-->
+  <header class="text-center mb-3">
+    <h1 class="display-4 text-white">Kursdoshlar</h1>
+    <p class="text-white lead mb-0">Bu chatda siz tengdoshlaringiz bilan fikr almashishingiz mumkin!</p>
+  </header>
+  <div class="row rounded-lg overflow-hidden shadow">
+    <!-- Users box-->
+    <div class="col-5 px-0">
+      <div class="bg-white">
+
+        <div class="bg-gray px-4 py-2 bg-light">
+          <p class="h5 mb-0 py-1">Users</p>
+        </div>
+
+        <div class="messages-box">
+          <div class="list-group rounded-0">
+              <% users.forEach(user => { %>
+                <button <% if(user.name === currentUser){%> class = "list-group-item list-group-item-action active rounded-0" <%} %>  class="list-group-item list-group-item-action rounded-0">
+                  <%= user.name%> 
+                </button>
+              <% }) %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Box-->
+    <div class="chatarea col-7 px-0">
+        
+      <div class="px-4 py-5 chat-box bg-white">
+        <% messages.forEach((message)=>{%>
+          <% if(message.username == currentUser){%>
+
+        <!-- Sender Message-->
+        <div class="media w-50 ml-auto mb-3"> 
+          <div class="media-body">
+            <p class="small text-muted"><%= message.username %> </p>
+            <div class="bg-success rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-white"><%= message.text %> </p>
+            </div>
+          </div>
+        </div>
+
+            <%}  else { %>
+              <!-- Resiver Message-->
+
+        <div  class="media w-50 mb-3">
+          <div class="media-body ml-3">
+            <p class="small text-muted"><%= message.username %> </p>
+            <div class="bg-primary rounded py-2 px-3 mb-2">
+              <p class="text-small mb-0 text-white"><%= message.text %> </p>
+            </div>
+          </div>
+        </div>
+              
+              <%}%>
+             
+        
+        <% }) %> 
+
+
+      </div> 
+      <!-- Typing area -->
+      <form action="/chat" method="POST" class="bg-light">
+        <div class="input-group">
+          <input type="text" name="text" placeholder="Type a message" aria-describedby="button-addon2"
+            class="form-control rounded-0 border-0 py-4 bg-light">
+          <div class="input-group-append">
+            <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="index.js"></script> -->
+  </body>
+
+  </html>
