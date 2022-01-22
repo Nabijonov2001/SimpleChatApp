@@ -6,7 +6,6 @@ const app = express();
 
 const result = require("dotenv");
 result.config();
-const { urlencoded } = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT;
